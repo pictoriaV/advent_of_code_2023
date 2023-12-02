@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 sample_lines = File.read("SAMPLE.txt").split("\n")
 lines = File.read("INPUT.txt").split("\n")
 
@@ -45,10 +47,10 @@ def decode_and_add_first_and_last_digits(lines)
   lines.each do |line|
     first_match = line.match(/one|two|three|four|five|six|seven|eight|nine|\d/)[0]
     last_match = line.reverse.match(/eno|owt|eerht|ruof|evif|xis|neves|thgie|enin|\d/)[0]
-    first = replace_with_digit(first_match)
-    last = replace_with_digit(last_match, reverse=true)
-    tens_place += first
-    ones_place += last
+    first_digit = replace_with_digit(first_match)
+    last_digit = replace_with_digit(last_match, reverse=true)
+    tens_place += first_digit
+    ones_place += last_digit
   end
   total = tens_place * 10 + ones_place
   puts total
@@ -63,5 +65,6 @@ def replace_with_digit(word_or_digit, reverse=false)
     return reverse ? REVERSED_ENGLISH_TO_NUMBERS[word_or_digit] : ENGLISH_TO_NUMBERS[word_or_digit]
   end
 end
+
 decode_and_add_first_and_last_digits(lines)
 
